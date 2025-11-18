@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubco Credit Union - Recién Casados</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+        body { background-color: #f4f4f4; }
+
+        header {
+            background-color: #004080;
+            color: white;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+
+        header img { height: 50px; }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul { list-style: none; display: flex; align-items: center; }
+
+        nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover { text-decoration: underline; }
+
+        .search {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        main { margin-top: 90px; }
+
+        .banner {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            cursor: pointer;
+        }
+
+        .banner h2 { font-size: 2rem; margin-bottom: 10px; }
+
+        section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        section h2 { margin-bottom: 20px; color: #004080; }
+
+        section p { margin-bottom: 15px; line-height: 1.6; }
+
+        .steps { list-style: decimal inside; margin-bottom: 20px; }
+
+        form { display: flex; flex-direction: column; }
+
+        form input, form select, form button {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        form button {
+            background-color: #004080;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #004080;
+            color: white;
+        }
+
+        @media(max-width: 600px){
+            nav ul { flex-direction: column; }
+            nav ul li { margin: 10px 0; }
+            .banner h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://via.placeholder.com/150x50?text=Dubco+Logo" alt="Dubco Logo">
+        <nav>
+            <ul>
+                <li><a href="https://www.dubcocreditunion.ie/information" target="_blank">Información</a></li>
+                <li><a href="#unete">Únete</a></li>
+                <li><a href="https://www.dubcocreditunion.ie/services" target="_blank">Servicios</a></li>
+                <li><a href="https://www.dubcocreditunion.ie/about-us" target="_blank">Sobre Nosotros</a></li>
+                <li><a href="#registro">Registrarse</a></li>
+                <li><a href="https://www.dubcocreditunion.ie/login" target="_blank">Iniciar Sesión</a></li>
+                <li><a href="https://www.dubcocreditunion.ie/social-media" target="_blank">Redes Sociales</a></li>
+            </ul>
+            <div class="search">🔍</div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="banner" onclick="document.getElementById('telefono').scrollIntoView({behavior:'smooth'})">
+            <h2>Recién Casados</h2>
+            <p>Únete a Dubco Credit Union de manera fácil y rápida</p>
+        </div>
+
+        <section id="telefono">
+            <h2>Usando tu teléfono</h2>
+            <p>Hemos creado una forma segura e inteligente de convertirte en miembro directamente desde tu teléfono. Solo tienes que buscar nuestra aplicación.</p>
+        </section>
+
+        <section id="facial">
+            <h2>Verificación Facial Segura</h2>
+            <p>Usamos un sistema avanzado geométrico para capturar quién eres. Simplemente toma una selfie y confirma tu identidad.</p>
+        </section>
+
+        <section id="unete">
+            <h2>Cómo unirte</h2>
+            <ul class="steps">
+                <li>Nombre completo</li>
+                <li>Correo electrónico</li>
+                <li>Identificación oficial</li>
+                <li>Número de teléfono</li>
+                <li>Otros datos requeridos</li>
+            </ul>
+            <form id="registro">
+                <h2>Únete Ahora</h2>
+                <input type="text" name="nombre" placeholder="Nombre completo" required>
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+                <input type="tel" name="telefono" placeholder="Número de teléfono" required>
+                <input type="text" name="identificacion" placeholder="Identificación oficial" required>
+                <button type="button" onclick="siguientePaso()">Empezar</button>
+            </form>
+        </section>
+
+        <section id="pago" style="display:none;">
+            <h2>Bienvenido a ser nuevo miembro</h2>
+            <p>Cómo te gustaría pagar:</p>
+            <form id="form-pago">
+                <input type="text" name="tarjeta" placeholder="Número de tarjeta de crédito" required>
+                <input type="text" name="nombreTarjeta" placeholder="Nombre en la tarjeta" required>
+                <button type="button" onclick="mostrarBienvenida()">Pagar y Finalizar</button>
+            </form>
+        </section>
+
+        <section id="bienvenida" style="display:none;">
+            <h2>¡Bienvenido, <span id="nombreUsuario"></span>!</h2>
+            <p>Ahora eres un nuevo miembro de Dubco Credit Union.</p>
+        </section>
+
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <p>Teléfono: +353 123 456 789</p>
+            <p>Email: contacto@dubcocreditunion.ie</p>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Dubco Credit Union. Todos los derechos reservados.
+    </footer>
+
+    <script>
+        function siguientePaso() {
+            const nombre = document.querySelector('input[name="nombre"]').value;
+            if(nombre === '') { alert('Por favor ingresa tu nombre'); return; }
+            document.getElementById('unete').style.display = 'none';
+            document.getElementById('pago').style.display = 'block';
+        }
+
+        function mostrarBienvenida() {
+            const nombre = document.querySelector('input[name="nombre"]').value;
+            const tarjeta = document.querySelector('input[name="tarjeta"]').value;
+            if(tarjeta === '') { alert('Por favor ingresa tu tarjeta'); return; }
+            document.getElementById('pago').style.display = 'none';
+            document.getElementById('bienvenida').style.display = 'block';
+            document.getElementById('nombreUsuario').textContent = nombre;
+        }
+    </script>
+
+</body>
+</html>
